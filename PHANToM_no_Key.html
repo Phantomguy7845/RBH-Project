@@ -1,0 +1,20 @@
+PHANToM_Round = 99;
+PHANToM_Start = 0;
+PHANToM_List = [0 to 99];
+PHANToM_Random = shuffleList(PHANToM_List);
+while(PHANToM_Start <= PHANToM_Round)
+{//setText("");
+//setSelection(0,2);
+//setText2ById("com.phantom.user.th:id/edit_text", "");
+if(PHANToM_Start >= 100){PHANToM_Start = 0};
+PHANToM = getElement(PHANToM_Random,PHANToM_Start);
+if(PHANToM <= 9){PHANToM = "0{PHANToM}"}
+else if(PHANToM >=10){PHANToM ="{PHANToM}"}
+//setText("{PHANToM}");
+//setSelection(0,2);
+setText2ById("com.phantom.user.th:id/edit_text", PHANToM);
+setText2ByIdAndIndex("", 12, PHANToM);
+sleep(PHANToM_Sleep);
+PHANToM_Start = PHANToM_Start + 1;}
+Textbox_P = getBoundsByIdAndIndex("", 12);
+  PHANToM = "Line : phantom1669";
