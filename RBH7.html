@@ -1,0 +1,27 @@
+ct = 0;
+while(Success == null and 
+       online == null and
+lookingforwork == null and
+            ct <= 10000 ){
+st = random(0,9);
+nd = random(0,9);
+Notification = "⌨️ Unavilable Input Method !";
+sendText("{st}");
+//setSelection2ByIdAndIndex("", 12, 1, 2);
+sleep(PHANToM_Sleep);
+setSelection(1, 2);
+sendText("{nd}");
+//setSelection2ByIdAndIndex("", 12, 0, 2);
+setSelection(0, 1);
+Success = getBounds("*รับงานแล้ว*");
+online = getBounds("ออนไลน์");
+lookingforwork = getBounds("กำลังมองหางาน...");
+ct = ct + 1;
+sleep(PHANToM_Sleep)}
+Notification = random(0,4);
+     if(Notification == 0){Notification = "PHANToM"}
+else if(Notification == 1){Notification = "PHANToM RUN NUM v.7"}
+else if(Notification == 2){Notification = "Line : phantom1669"}
+else if(Notification == 3){Notification = "ไฟล์แจก by PHANToM"}
+else if(Notification == 4){Notification = "Auto Update Script"}
+Notification = "อยู่ระหว่างการทดสอบ"
