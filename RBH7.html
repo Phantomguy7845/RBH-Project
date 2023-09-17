@@ -1,5 +1,6 @@
 ct = 0;
-while(Success == null and 
+while(store == null and 
+      Success == null and 
        online == null and
 lookingforwork == null and
             ct <= 10000 ){
@@ -16,6 +17,7 @@ setSelection(0, 1);
 Success = getBounds("*รับงานแล้ว*");
 online = getBounds("ออนไลน์");
 lookingforwork = getBounds("กำลังมองหางาน...");
+store = getBounds("ไปที่ร้านค้า");
 ct = ct + 1;
 sleep(PHANToM_Sleep)}
 Notification = random(0,4);
