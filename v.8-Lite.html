@@ -1,0 +1,20 @@
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}
+PHANToM = random(0,2);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                if(PHANToM == 0){Notification = "PHANToM RUNNUM V.8"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                else if (PHANToM == 1){Notification = "Line:phantom1669"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                else if (PHANToM == 2){Notification = "อัปเดท 26 ก.ย. 12:14 น."}
