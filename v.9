@@ -1,0 +1,283 @@
+global_Working = 1;
+kilo_max = global_kilo_max;//กิโลสูงสุด
+kilo_min = 0;              //กิโลต่ำสุด
+price_max = global_price_max;
+price_min = global_price_min;
+PHANToM_Sleep = global_PHANToM_Sleep;  //ความเร็ว
+PHANToM_Round = global_PHANToM_Round;      //รอบการทำงาน
+PHANToM_Scale = global_PHANToM_Scale;      //สเกลความเร็วต่อหน่วย
+PHANToM_Delay = global_PHANToM_Delay;
+
+
+PHANToM_trigger = trigger;
+
+
+Count_trigger = 1;
+while(Count_trigger <= 800){
+Count_trigger = Count_trigger + 1;
+if(PHANToM_trigger == "PHANToM RBH #"){
+if(global_PHANToM_runnum == 1){
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}}}
+else if(PHANToM_trigger != "PHANToM RBH #")
+{
+{bounds_14 = getContentDescriptionByIdAndIndex("", 14);
+if(bounds_14 == null){notify14 ="กำลังทำงาน"}
+else if(bounds_14 != null){
+ kilo_14 = findAll(bounds_14, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_14 = findAll(bounds_14, '.*[0-9][0-9].[0-9].*');
+ kilo_14_r1=replace(kilo_14, '[', '');
+ kilo_14_r2=replace(kilo_14_r1, ']', '');
+ kilo_14_fr = kilo_14_r2 ;
+ price_14_r1=replace(price_14, '[', '');
+ price_14_r2=replace(price_14_r1, ']', '');
+ price_14_fr = price_14_r2 ;
+ if(price_max == null or price_min == null)
+   {notify14 = "โปรดกำหนด'ราคา'"}
+ else if(price_max < price_min)
+        {notify14 = "'ราคา'ผิดพลาด"}
+ else if(price_max >= price_min)
+        {if(price_14_fr > price_max)
+           {notify14 = "'ราคา'เกินกว่ากำหนด"}
+         else if(price_14_fr < price_min)
+                {notify14 = "'ราคา'ต่ำกว่ากำหนด"} 
+         else if(price_14_fr <= price_max and 
+            price_14_fr >= price_min)
+           {if(kilo_max == null or 
+               kilo_min == null){notify14 = "โปรดตั้งเงื่อนไขกิโล"}
+             else if(kilo_max < kilo_min){notify14 = "'ระยะกิโล'ผิดพลาด"}
+             else if(kilo_max >= kilo_min)
+             {if(kilo_14_fr > kilo_max)
+                {notify14 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_14_fr < kilo_min)
+                     {notify14 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_14_fr <= kilo_max and
+                      kilo_14_fr >= kilo_min)
+                      {clickByIdAndIndex("", 15);
+sleep(PHANToM_Delay);
+if(global_PHANToM_runnum == 1){
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}}
+PHANToM = random(0,2);
+PHANToM_liecent = random(0,2);
+if(PHANToM_liecent == 0){Notification = "PHANToM"}
+else if(PHANToM_liecent == 1){Notification = "Line: phantom1669"}
+else if(PHANToM_liecent == 2){Notification = "อัปเดท 7 ต.ค. 12:20น."}
+
+}}}}}
+
+bounds_16 = getContentDescriptionByIdAndIndex("", 16);
+if(bounds_16 == null){notify16 ="กำลังทำงาน"}
+else if(bounds_16 != null){
+kilo_16 = findAll(bounds_16, '.*[0-9].[0-9][[0-9][ ]].*');
+price_16 = findAll(bounds_16, '.*[0-9][0-9].[0-9].*');
+kilo_16_r1=replace(kilo_16, '[', '');
+kilo_16_r2=replace(kilo_16_r1, ']', '');
+kilo_16_fr = kilo_16_r2 ;
+price_16_r1=replace(price_16, '[', '');
+price_16_r2=replace(price_16_r1, ']', '');
+price_16_fr = price_16_r2 ;
+if(price_max == null or price_min == null)
+  {notify16 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+       {notify16 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+       {if(price_16_fr > price_max)
+          {notify16 = "'ราคา'เกินกว่ากำหนด"}
+        else if(price_16_fr < price_min)
+               {notify16 = "'ราคา'ต่ำกว่ากำหนด"} 
+        else if(price_16_fr <= price_max and 
+           price_16_fr >= price_min)
+          {if(kilo_max == null or 
+              kilo_min == null){notify16 = "โปรดตั้งเงื่อนไขกิโล"}
+            else if(kilo_max < kilo_min){notify16 = "'ระยะกิโล'ผิดพลาด"}
+            else if(kilo_max >= kilo_min)
+            {if(kilo_16_fr > kilo_max)
+               {notify16 = "'ระยะกิโล'เกินกว่ากำหนด"}
+             else if(kilo_16_fr < kilo_min)
+                    {notify16 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+             else if(kilo_16_fr <= kilo_max and
+                     kilo_16_fr >= kilo_min)
+                     {clickByIdAndIndex("", 17);
+sleep(PHANToM_Delay);
+if(global_PHANToM_runnum == 1){
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}}
+PHANToM = random(0,2);
+PHANToM_liecent = random(0,2);
+if(PHANToM_liecent == 0){Notification = "PHANToM"}
+else if(PHANToM_liecent == 1){Notification = "Line: phantom1669"}
+else if(PHANToM_liecent == 2){Notification = "อัปเดท 7 ต.ค. 12:20น."}
+
+}}}}}
+
+bounds_18 = getContentDescriptionByIdAndIndex("", 18);
+if(bounds_18 == null){notify18 ="กำลังทำงาน"}
+else if(bounds_18 != null){
+kilo_18 = findAll(bounds_18, '.*[0-9].[0-9][[0-9][ ]].*');
+price_18 = findAll(bounds_18, '.*[0-9][0-9].[0-9].*');
+kilo_18_r1=replace(kilo_18, '[', '');
+kilo_18_r2=replace(kilo_18_r1, ']', '');
+kilo_18_fr = kilo_18_r2 ;
+price_18_r1=replace(price_18, '[', '');
+price_18_r2=replace(price_18_r1, ']', '');
+price_18_fr = price_18_r2 ;
+if(price_max == null or price_min == null)
+  {notify18 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+       {notify18 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+       {if(price_18_fr > price_max)
+          {notify18 = "'ราคา'เกินกว่ากำหนด"}
+        else if(price_18_fr < price_min)
+               {notify18 = "'ราคา'ต่ำกว่ากำหนด"} 
+        else if(price_18_fr <= price_max and 
+           price_18_fr >= price_min)
+          {if(kilo_max == null or 
+              kilo_min == null){notify18 = "โปรดตั้งเงื่อนไขกิโล"}
+            else if(kilo_max < kilo_min){notify18 = "'ระยะกิโล'ผิดพลาด"}
+            else if(kilo_max >= kilo_min)
+            {if(kilo_18_fr > kilo_max)
+               {notify18 = "'ระยะกิโล'เกินกว่ากำหนด"}
+             else if(kilo_18_fr < kilo_min)
+                    {notify18 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+             else if(kilo_18_fr <= kilo_max and
+                     kilo_18_fr >= kilo_min)
+                     {clickByIdAndIndex("", 19);
+sleep(PHANToM_Delay);
+if(global_PHANToM_runnum == 1){
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}}
+PHANToM = random(0,2);
+PHANToM_liecent = random(0,2);
+if(PHANToM_liecent == 0){Notification = "PHANToM"}
+else if(PHANToM_liecent == 1){Notification = "Line: phantom1669"}
+else if(PHANToM_liecent == 2){Notification = "อัปเดท 7 ต.ค. 12:20น."}
+
+}}}}}
+
+bounds_20 = getContentDescriptionByIdAndIndex("", 20);
+if(bounds_20 == null){notify20 ="กำลังทำงาน"}
+else if(bounds_20 != null){
+kilo_20 = findAll(bounds_20, '.*[0-9].[0-9][[0-9][ ]].*');
+price_20 = findAll(bounds_20, '.*[0-9][0-9].[0-9].*');
+kilo_20_r1=replace(kilo_20, '[', '');
+kilo_20_r2=replace(kilo_20_r1, ']', '');
+kilo_20_fr = kilo_20_r2 ;
+price_20_r1=replace(price_20, '[', '');
+price_20_r2=replace(price_20_r1, ']', '');
+price_20_fr = price_20_r2 ;
+if(price_max == null or price_min == null)
+  {notify20 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+       {notify20 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+       {if(price_20_fr > price_max)
+          {notify20 = "'ราคา'เกินกว่ากำหนด"}
+        else if(price_20_fr < price_min)
+               {notify20 = "'ราคา'ต่ำกว่ากำหนด"} 
+        else if(price_20_fr <= price_max and 
+           price_20_fr >= price_min)
+          {if(kilo_max == null or 
+              kilo_min == null){notify20 = "โปรดตั้งเงื่อนไขกิโล"}
+            else if(kilo_max < kilo_min){notify20 = "'ระยะกิโล'ผิดพลาด"}
+            else if(kilo_max >= kilo_min)
+            {if(kilo_20_fr > kilo_max)
+               {notify20 = "'ระยะกิโล'เกินกว่ากำหนด"}
+             else if(kilo_20_fr < kilo_min)
+                    {notify20 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+             else if(kilo_20_fr <= kilo_max and
+                     kilo_20_fr >= kilo_min)
+                     {clickByIdAndIndex("", 21);
+sleep(PHANToM_Delay);
+if(global_PHANToM_runnum == 1){
+PHANToM_CT = 1;
+while(PHANToM_CT <= PHANToM_Round){
+Num = 0;
+PHANToM_List = [0 to 99];
+shuffleList(PHANToM_List);
+while(Num <= 99){
+PHANToM_Element = getElement(PHANToM_List, Num);
+if (PHANToM_Element <= 9){PHANToM = "0{PHANToM_Element}"}
+else if (PHANToM_Element >= 10){PHANToM = "{PHANToM_Element}"};
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+sendText(PHANToM);
+setSelection(0, 2);
+sleep(PHANToM_Sleep);
+ PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+Num = (Num + 1);}
+PHANToM_CT = PHANToM_CT + 1}}
+PHANToM = random(0,2);
+PHANToM_liecent = random(0,2);
+if(PHANToM_liecent == 0){Notification = "PHANToM"}
+else if(PHANToM_liecent == 1){Notification = "Line: phantom1669"}
+else if(PHANToM_liecent == 2){Notification = "อัปเดท 7 ต.ค. 12:20น."}
+
+}}}}}}}
+PHANToM_trigger = trigger}
+
+
+
+if(bounds_16 == null){Notification = notify14}
+else if(bounds_16 != null)
+{PHANToM_liecent = random(0,2);
+if(PHANToM_liecent == 0){Notification = "PHANToM"}
+else if(PHANToM_liecent == 1){Notification = "Line: phantom1669"}
+else if(PHANToM_liecent == 2){Notification = "อัปเดท 7 ต.ค. 12:20น."}
+}
