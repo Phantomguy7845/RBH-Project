@@ -1,0 +1,949 @@
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        kilo_max = global_kilo_max;
+        kilo_min = global_kilo_min;
+       price_max = global_price_max;
+       price_min = global_price_min;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+   PHANToM_Sleep = global_PHANToM_Sleep;  
+   PHANToM_Round = global_PHANToM_Round; 
+   PHANToM_Scale = global_PHANToM_Scale;      
+   PHANToM_Delay = global_PHANToM_Delay;
+  PHANToM_Scale1 = global_PHANToM_Scale1;
+        shop_ban = ".*{global_shop_ban}.*";
+   shop_ban_list = replaceAll(shop_ban,',','.*|.*');
+          Origin = ".*{global_Origin}.*";
+     Origin_List = replaceAll(Origin,',','.*|.*');
+     Destination = ".*{global_Destination}.*";
+Destination_List = replaceAll(Destination,',','.*|.*');
+
+
+
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_14 = getContentDescriptionByIdAndIndex("", 14);
+ if(bounds_14 == "" and Online    != null){Notification = "กำลังทำงาน"}
+ else if(bounds_14 != ""   and Online    != null and bounds_14 != null)
+{ban_detect_14 = findAll(bounds_14,'.*\nอยู่ห่าง');
+ ban_detect_14st = replaceAll(ban_detect_14,'\nอยู่ห่าง]','');
+ ban_detect_14nd =replace(ban_detect_14st, '[', '');
+ ban_matches_14 = matches(ban_detect_14nd,shop_ban_list);
+ kilo_14 = findAll(bounds_14, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_14 = findAll(bounds_14, '.*[0-9][0-9].[0-9].*');
+ kilo_14_r1=replace(kilo_14, '[', '');
+ kilo_14_r2=replace(kilo_14_r1, ']', '');
+ kilo_14_fr = kilo_14_r2 ;
+ price_14_r1=replace(price_14, '[', '');
+ price_14_r2=replace(price_14_r1, ']', '');
+ price_14_fr = price_14_r2 ;
+ Origin_detect_14 = findAll(bounds_14,'กม.\n.*');
+ Origin_detect_14st = replace(Origin_detect_14, '[กม.\n', '');
+ Origin_detect_14nd = replaceAll(Origin_detect_14st,']','');
+ Destination_detect_14 = findAll(bounds_14,'กม.\n.*\n.*');
+ Destination_detect_14st =replaceAll(Destination_detect_14,']','');
+ Destination_detect_14nd = replaceAll(Destination_detect_14st, 'กม.\n.*\n', '');
+ Destination_detect_14th = replace(Destination_detect_14nd, '[', '');
+ ban_matches_14 = matches(ban_detect_14nd,shop_ban_list);
+ Origin_matches_14 = matches(Origin_detect_14nd,Origin_List);
+ Destination_matches_14 = matches(Destination_detect_14nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_14 == true){Checkpoint14 = 1; notify14 ="แบนร้าน"}
+else if(ban_matches_14 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_14_fr > price_max)
+{Checkpoint14 = 1; notify14 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_14_fr < price_min)
+{Checkpoint14 = 1; notify14 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_14_fr <= price_max and 
+price_14_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_14_fr > kilo_max)
+{Checkpoint14 = 1; notify14 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_14_fr < kilo_min)
+                     {Checkpoint14 = 1; notify14 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_14_fr <= kilo_max and
+                      kilo_14_fr >= kilo_min)
+{if(global_OriginLock != 1 and global_DestinateLock != 1)
+{clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_OriginLock == 1){
+if(Origin_matches_14 == false){Checkpoint14 = 1; notify14 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_14 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_14 == false)
+{Checkpoint14 = 1; notify14 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_14 == true){clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1){if(global_DestinateLock != 1){
+clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_14 == false)
+{Checkpoint14 = 1; notify14 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_14 == true){clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint14 = 1; notify14 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint14 = 1; notify14 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_14_fr > price_max)
+{Checkpoint14 = 1; notify14 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_14_fr < price_min)
+{Checkpoint14 = 1; notify14 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_14_fr <= price_max and 
+price_14_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint14 = 1; notify14 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint14 = 1; notify14 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_14_fr > kilo_max)
+{Checkpoint14 = 1; notify14 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_14_fr < kilo_min)
+                     {Checkpoint14 = 1; notify14 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_14_fr <= kilo_max and
+                      kilo_14_fr >= kilo_min)
+{if(global_OriginLock != 1 and global_DestinateLock != 1)
+{clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_OriginLock == 1){
+if(Origin_matches_14 == false){Checkpoint14 = 1; notify14 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_14 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_14 == false)
+{Checkpoint14 = 1; notify14 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_14 == true){clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1){if(global_DestinateLock != 1){
+clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_14 == false)
+{Checkpoint14 = 1; notify14 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_14 == true){clickByIdAndIndex("", 15);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}
+}}}if(sorry != null){sleep(300);click("กลับสู่หน้ารับงาน");
+sleep(300);click("ตกลง");}
+
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_16 = getContentDescriptionByIdAndIndex("", 16);
+ if(bounds_16 == "" and Online    != null and Checkpoint14 == 1){Notification = notify14}
+ else if(bounds_16 != ""   and Online    != null and bounds_16 != null and Checkpoint14 == 1)
+{ban_detect_16 = findAll(bounds_16,'.*\nอยู่ห่าง');
+ ban_detect_16st = replaceAll(ban_detect_16,'\nอยู่ห่าง]','');
+ ban_detect_16nd =replace(ban_detect_16st, '[', '');
+ ban_matches_16 = matches(ban_detect_16nd,shop_ban_list);
+ kilo_16 = findAll(bounds_16, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_16 = findAll(bounds_16, '.*[0-9][0-9].[0-9].*');
+ kilo_16_r1=replace(kilo_16, '[', '');
+ kilo_16_r2=replace(kilo_16_r1, ']', '');
+ kilo_16_fr = kilo_16_r2 ;
+ price_16_r1=replace(price_16, '[', '');
+ price_16_r2=replace(price_16_r1, ']', '');
+ price_16_fr = price_16_r2 ;
+ Origin_detect_16 = findAll(bounds_16,'กม.\n.*');
+ Origin_detect_16st = replace(Origin_detect_16, '[กม.\n', '');
+ Origin_detect_16nd = replaceAll(Origin_detect_16st,']','');
+ Destination_detect_16 = findAll(bounds_16,'กม.\n.*\n.*');
+ Destination_detect_16st =replaceAll(Destination_detect_16,']','');
+ Destination_detect_16nd = replaceAll(Destination_detect_16st, 'กม.\n.*\n', '');
+ Destination_detect_16th = replace(Destination_detect_16nd, '[', '');
+ ban_matches_16 = matches(ban_detect_16nd,shop_ban_list);
+ Origin_matches_16 = matches(Origin_detect_16nd,Origin_List);
+ Destination_matches_16 = matches(Destination_detect_16nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_16 == true){Checkpoint16 = 1; notify16 ="แบนร้าน"}
+else if(ban_matches_16 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_16_fr > price_max)
+{Checkpoint16 = 1; notify16 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_16_fr < price_min)
+{Checkpoint16 = 1; notify16 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_16_fr <= price_max and 
+price_16_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_16_fr > kilo_max)
+{Checkpoint16 = 1; notify16 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_16_fr < kilo_min)
+                     {Checkpoint16 = 1; notify16 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_16_fr <= kilo_max and
+                      kilo_16_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_16 == false){Checkpoint16 = 1; notify16 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_16 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_16 == false){Checkpoint16 = 1; notify16 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_16 == true){clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_16 == false){Checkpoint16 = 1; notify16 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_16 == true){clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint16 = 1; notify16 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint16 = 1; notify16 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_16_fr > price_max)
+{Checkpoint16 = 1; notify16 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_16_fr < price_min)
+{Checkpoint16 = 1; notify16 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_16_fr <= price_max and 
+price_16_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint16 = 1; notify16 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint16 = 1; notify16 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_16_fr > kilo_max)
+{Checkpoint16 = 1; notify16 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_16_fr < kilo_min)
+                     {Checkpoint16 = 1; notify16 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_16_fr <= kilo_max and
+                      kilo_16_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_16 == false){Checkpoint16 = 1; notify16 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_16 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_16 == false){Checkpoint16 = 1; notify16 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_16 == true){clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_16 == false){Checkpoint16 = 1; notify16 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_16 == true){clickByIdAndIndex("", 17);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_18 = getContentDescriptionByIdAndIndex("", 18);
+ if(bounds_18 == "" and Online    != null and Checkpoint16 == 1){Notification = notify16}
+ else if(bounds_18 != ""   and Online    != null and bounds_18 != null and Checkpoint16 == 1)
+{ban_detect_18 = findAll(bounds_18,'.*\nอยู่ห่าง');
+ ban_detect_18st = replaceAll(ban_detect_18,'\nอยู่ห่าง]','');
+ ban_detect_18nd =replace(ban_detect_18st, '[', '');
+ ban_matches_18 = matches(ban_detect_18nd,shop_ban_list);
+ kilo_18 = findAll(bounds_18, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_18 = findAll(bounds_18, '.*[0-9][0-9].[0-9].*');
+ kilo_18_r1=replace(kilo_18, '[', '');
+ kilo_18_r2=replace(kilo_18_r1, ']', '');
+ kilo_18_fr = kilo_18_r2 ;
+ price_18_r1=replace(price_18, '[', '');
+ price_18_r2=replace(price_18_r1, ']', '');
+ price_18_fr = price_18_r2 ;
+ Origin_detect_18 = findAll(bounds_18,'กม.\n.*');
+ Origin_detect_18st = replace(Origin_detect_18, '[กม.\n', '');
+ Origin_detect_18nd = replaceAll(Origin_detect_18st,']','');
+ Destination_detect_18 = findAll(bounds_18,'กม.\n.*\n.*');
+ Destination_detect_18st =replaceAll(Destination_detect_18,']','');
+ Destination_detect_18nd = replaceAll(Destination_detect_18st, 'กม.\n.*\n', '');
+ Destination_detect_18th = replace(Destination_detect_18nd, '[', '');
+ ban_matches_18 = matches(ban_detect_18nd,shop_ban_list);
+ Origin_matches_18 = matches(Origin_detect_18nd,Origin_List);
+ Destination_matches_18 = matches(Destination_detect_18nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_18 == true){Checkpoint18 = 1; notify18 ="แบนร้าน"}
+else if(ban_matches_18 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_18_fr > price_max)
+{Checkpoint18 = 1; notify18 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_18_fr < price_min)
+{Checkpoint18 = 1; notify18 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_18_fr <= price_max and 
+price_18_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_18_fr > kilo_max)
+{Checkpoint18 = 1; notify18 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_18_fr < kilo_min)
+                     {Checkpoint18 = 1; notify18 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_18_fr <= kilo_max and
+                      kilo_18_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_18 == false){Checkpoint18 = 1; notify18 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_18 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_18 == false){Checkpoint18 = 1; notify18 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_18 == true){clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_18 == false){Checkpoint18 = 1; notify18 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_18 == true){clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint18 = 1; notify18 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint18 = 1; notify18 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_18_fr > price_max)
+{Checkpoint18 = 1; notify18 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_18_fr < price_min)
+{Checkpoint18 = 1; notify18 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_18_fr <= price_max and 
+price_18_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint18 = 1; notify18 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint18 = 1; notify18 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_18_fr > kilo_max)
+{Checkpoint18 = 1; notify18 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_18_fr < kilo_min)
+                     {Checkpoint18 = 1; notify18 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_18_fr <= kilo_max and
+                      kilo_18_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_18 == false){Checkpoint18 = 1; notify18 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_18 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_18 == false){Checkpoint18 = 1; notify18 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_18 == true){clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_18 == false){Checkpoint18 = 1; notify18 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_18 == true){clickByIdAndIndex("", 19);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_20 = getContentDescriptionByIdAndIndex("", 20);
+ if(bounds_20 == "" and Online    != null and Checkpoint18 == 1){Notification = notify18}
+ else if(bounds_20 != ""   and Online    != null and bounds_20 != null and Checkpoint18 == 1)
+{ban_detect_20 = findAll(bounds_20,'.*\nอยู่ห่าง');
+ ban_detect_20st = replaceAll(ban_detect_20,'\nอยู่ห่าง]','');
+ ban_detect_20nd =replace(ban_detect_20st, '[', '');
+ ban_matches_20 = matches(ban_detect_20nd,shop_ban_list);
+ kilo_20 = findAll(bounds_20, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_20 = findAll(bounds_20, '.*[0-9][0-9].[0-9].*');
+ kilo_20_r1=replace(kilo_20, '[', '');
+ kilo_20_r2=replace(kilo_20_r1, ']', '');
+ kilo_20_fr = kilo_20_r2 ;
+ price_20_r1=replace(price_20, '[', '');
+ price_20_r2=replace(price_20_r1, ']', '');
+ price_20_fr = price_20_r2 ;
+ Origin_detect_20 = findAll(bounds_20,'กม.\n.*');
+ Origin_detect_20st = replace(Origin_detect_20, '[กม.\n', '');
+ Origin_detect_20nd = replaceAll(Origin_detect_20st,']','');
+ Destination_detect_20 = findAll(bounds_20,'กม.\n.*\n.*');
+ Destination_detect_20st =replaceAll(Destination_detect_20,']','');
+ Destination_detect_20nd = replaceAll(Destination_detect_20st, 'กม.\n.*\n', '');
+ Destination_detect_20th = replace(Destination_detect_20nd, '[', '');
+ ban_matches_20 = matches(ban_detect_20nd,shop_ban_list);
+ Origin_matches_20 = matches(Origin_detect_20nd,Origin_List);
+ Destination_matches_20 = matches(Destination_detect_20nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_20 == true){Checkpoint20 = 1; notify20 ="แบนร้าน"}
+else if(ban_matches_20 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_20_fr > price_max)
+{Checkpoint20 = 1; notify20 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_20_fr < price_min)
+{Checkpoint20 = 1; notify20 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_20_fr <= price_max and 
+price_20_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_20_fr > kilo_max)
+{Checkpoint20 = 1; notify20 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_20_fr < kilo_min)
+                     {Checkpoint20 = 1; notify20 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_20_fr <= kilo_max and
+                      kilo_20_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_20 == false){Checkpoint20 = 1; notify20 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_20 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_20 == false){Checkpoint20 = 1; notify20 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_20 == true){clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_20 == false){Checkpoint20 = 1; notify20 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_20 == true){clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint20 = 1; notify20 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint20 = 1; notify20 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_20_fr > price_max)
+{Checkpoint20 = 1; notify20 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_20_fr < price_min)
+{Checkpoint20 = 1; notify20 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_20_fr <= price_max and 
+price_20_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint20 = 1; notify20 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint20 = 1; notify20 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_20_fr > kilo_max)
+{Checkpoint20 = 1; notify20 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_20_fr < kilo_min)
+                     {Checkpoint20 = 1; notify20 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_20_fr <= kilo_max and
+                      kilo_20_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_20 == false){Checkpoint20 = 1; notify20 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_20 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_20 == false){Checkpoint20 = 1; notify20 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_20 == true){clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_20 == false){Checkpoint20 = 1; notify20 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_20 == true){clickByIdAndIndex("", 21);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_15 = getContentDescriptionByIdAndIndex("", 15);
+ if(bounds_15 == "" and Online    != null and Checkpoint20 == 1){Notification = notify20}
+ else if(bounds_15 != ""   and Online    != null and bounds_15 != null and Checkpoint20 == 1)
+{ban_detect_15 = findAll(bounds_15,'.*\nอยู่ห่าง');
+ ban_detect_15st = replaceAll(ban_detect_15,'\nอยู่ห่าง]','');
+ ban_detect_15nd =replace(ban_detect_15st, '[', '');
+ ban_matches_15 = matches(ban_detect_15nd,shop_ban_list);
+ kilo_15 = findAll(bounds_15, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_15 = findAll(bounds_15, '.*[0-9][0-9].[0-9].*');
+ kilo_15_r1=replace(kilo_15, '[', '');
+ kilo_15_r2=replace(kilo_15_r1, ']', '');
+ kilo_15_fr = kilo_15_r2 ;
+ price_15_r1=replace(price_15, '[', '');
+ price_15_r2=replace(price_15_r1, ']', '');
+ price_15_fr = price_15_r2 ;
+ Origin_detect_15 = findAll(bounds_15,'กม.\n.*');
+ Origin_detect_15st = replace(Origin_detect_15, '[กม.\n', '');
+ Origin_detect_15nd = replaceAll(Origin_detect_15st,']','');
+ Destination_detect_15 = findAll(bounds_15,'กม.\n.*\n.*');
+ Destination_detect_15st =replaceAll(Destination_detect_15,']','');
+ Destination_detect_15nd = replaceAll(Destination_detect_15st, 'กม.\n.*\n', '');
+ Destination_detect_15th = replace(Destination_detect_15nd, '[', '');
+ ban_matches_15 = matches(ban_detect_15nd,shop_ban_list);
+ Origin_matches_15 = matches(Origin_detect_15nd,Origin_List);
+ Destination_matches_15 = matches(Destination_detect_15nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_15 == true){Checkpoint15 = 1; notify15 ="แบนร้าน"}
+else if(ban_matches_15 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_15_fr > price_max)
+{Checkpoint15 = 1; notify15 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_15_fr < price_min)
+{Checkpoint15 = 1; notify15 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_15_fr <= price_max and 
+price_15_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_15_fr > kilo_max)
+{Checkpoint15 = 1; notify15 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_15_fr < kilo_min)
+                     {Checkpoint15 = 1; notify15 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_15_fr <= kilo_max and
+                      kilo_15_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_15 == false){Checkpoint15 = 1; notify15 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_15 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_15 == false){Checkpoint15 = 1; notify15 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_15 == true){clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_15 == false){Checkpoint15 = 1; notify15 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_15 == true){clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint15 = 1; notify15 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint15 = 1; notify15 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_15_fr > price_max)
+{Checkpoint15 = 1; notify15 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_15_fr < price_min)
+{Checkpoint15 = 1; notify15 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_15_fr <= price_max and 
+price_15_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint15 = 1; notify15 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint15 = 1; notify15 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_15_fr > kilo_max)
+{Checkpoint15 = 1; notify15 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_15_fr < kilo_min)
+                     {Checkpoint15 = 1; notify15 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_15_fr <= kilo_max and
+                      kilo_15_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_15 == false){Checkpoint15 = 1; notify15 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_15 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_15 == false){Checkpoint15 = 1; notify15 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_15 == true){clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_15 == false){Checkpoint15 = 1; notify15 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_15 == true){clickByIdAndIndex("", 16);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_17 = getContentDescriptionByIdAndIndex("", 17);
+ if(bounds_17 == "" and Online    != null and Checkpoint15 == 1){Notification = notify15}
+ else if(bounds_17 != ""   and Online    != null and bounds_17 != null and Checkpoint15 == 1)
+{ban_detect_17 = findAll(bounds_17,'.*\nอยู่ห่าง');
+ ban_detect_17st = replaceAll(ban_detect_17,'\nอยู่ห่าง]','');
+ ban_detect_17nd =replace(ban_detect_17st, '[', '');
+ ban_matches_17 = matches(ban_detect_17nd,shop_ban_list);
+ kilo_17 = findAll(bounds_17, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_17 = findAll(bounds_17, '.*[0-9][0-9].[0-9].*');
+ kilo_17_r1=replace(kilo_17, '[', '');
+ kilo_17_r2=replace(kilo_17_r1, ']', '');
+ kilo_17_fr = kilo_17_r2 ;
+ price_17_r1=replace(price_17, '[', '');
+ price_17_r2=replace(price_17_r1, ']', '');
+ price_17_fr = price_17_r2 ;
+ Origin_detect_17 = findAll(bounds_17,'กม.\n.*');
+ Origin_detect_17st = replace(Origin_detect_17, '[กม.\n', '');
+ Origin_detect_17nd = replaceAll(Origin_detect_17st,']','');
+ Destination_detect_17 = findAll(bounds_17,'กม.\n.*\n.*');
+ Destination_detect_17st =replaceAll(Destination_detect_17,']','');
+ Destination_detect_17nd = replaceAll(Destination_detect_17st, 'กม.\n.*\n', '');
+ Destination_detect_17th = replace(Destination_detect_17nd, '[', '');
+ ban_matches_17 = matches(ban_detect_17nd,shop_ban_list);
+ Origin_matches_17 = matches(Origin_detect_17nd,Origin_List);
+ Destination_matches_17 = matches(Destination_detect_17nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_17 == true){Checkpoint17 = 1; notify17 ="แบนร้าน"}
+else if(ban_matches_17 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_17_fr > price_max)
+{Checkpoint17 = 1; notify17 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_17_fr < price_min)
+{Checkpoint17 = 1; notify17 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_17_fr <= price_max and 
+price_17_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_17_fr > kilo_max)
+{Checkpoint17 = 1; notify17 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_17_fr < kilo_min)
+                     {Checkpoint17 = 1; notify17 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_17_fr <= kilo_max and
+                      kilo_17_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_17 == false){Checkpoint17 = 1; notify17 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_17 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_17 == false){Checkpoint17 = 1; notify17 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_17 == true){clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_17 == false){Checkpoint17 = 1; notify17 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_17 == true){clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint17 = 1; notify17 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint17 = 1; notify17 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_17_fr > price_max)
+{Checkpoint17 = 1; notify17 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_17_fr < price_min)
+{Checkpoint17 = 1; notify17 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_17_fr <= price_max and 
+price_17_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint17 = 1; notify17 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint17 = 1; notify17 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_17_fr > kilo_max)
+{Checkpoint17 = 1; notify17 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_17_fr < kilo_min)
+                     {Checkpoint17 = 1; notify17 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_17_fr <= kilo_max and
+                      kilo_17_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_17 == false){Checkpoint17 = 1; notify17 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_17 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_17 == false){Checkpoint17 = 1; notify17 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_17 == true){clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_17 == false){Checkpoint17 = 1; notify17 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_17 == true){clickByIdAndIndex("", 18);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_19 = getContentDescriptionByIdAndIndex("", 19);
+ if(bounds_19 == "" and Online    != null and Checkpoint17 == 1){Notification = notify17}
+ else if(bounds_19 != ""   and Online    != null and bounds_19 != null and Checkpoint17 == 1)
+{ban_detect_19 = findAll(bounds_19,'.*\nอยู่ห่าง');
+ ban_detect_19st = replaceAll(ban_detect_19,'\nอยู่ห่าง]','');
+ ban_detect_19nd =replace(ban_detect_19st, '[', '');
+ ban_matches_19 = matches(ban_detect_19nd,shop_ban_list);
+ kilo_19 = findAll(bounds_19, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_19 = findAll(bounds_19, '.*[0-9][0-9].[0-9].*');
+ kilo_19_r1=replace(kilo_19, '[', '');
+ kilo_19_r2=replace(kilo_19_r1, ']', '');
+ kilo_19_fr = kilo_19_r2 ;
+ price_19_r1=replace(price_19, '[', '');
+ price_19_r2=replace(price_19_r1, ']', '');
+ price_19_fr = price_19_r2 ;
+ Origin_detect_19 = findAll(bounds_19,'กม.\n.*');
+ Origin_detect_19st = replace(Origin_detect_19, '[กม.\n', '');
+ Origin_detect_19nd = replaceAll(Origin_detect_19st,']','');
+ Destination_detect_19 = findAll(bounds_19,'กม.\n.*\n.*');
+ Destination_detect_19st =replaceAll(Destination_detect_19,']','');
+ Destination_detect_19nd = replaceAll(Destination_detect_19st, 'กม.\n.*\n', '');
+ Destination_detect_19th = replace(Destination_detect_19nd, '[', '');
+ ban_matches_19 = matches(ban_detect_19nd,shop_ban_list);
+ Origin_matches_19 = matches(Origin_detect_19nd,Origin_List);
+ Destination_matches_19 = matches(Destination_detect_19nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_19 == true){Checkpoint19 = 1; notify19 ="แบนร้าน"}
+else if(ban_matches_19 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_19_fr > price_max)
+{Checkpoint19 = 1; notify19 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_19_fr < price_min)
+{Checkpoint19 = 1; notify19 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_19_fr <= price_max and 
+price_19_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_19_fr > kilo_max)
+{Checkpoint19 = 1; notify19 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_19_fr < kilo_min)
+                     {Checkpoint19 = 1; notify19 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_19_fr <= kilo_max and
+                      kilo_19_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_19 == false){Checkpoint19 = 1; notify19 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_19 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_19 == false){Checkpoint19 = 1; notify19 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_19 == true){clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_19 == false){Checkpoint19 = 1; notify19 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_19 == true){clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint19 = 1; notify19 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint19 = 1; notify19 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_19_fr > price_max)
+{Checkpoint19 = 1; notify19 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_19_fr < price_min)
+{Checkpoint19 = 1; notify19 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_19_fr <= price_max and 
+price_19_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint19 = 1; notify19 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint19 = 1; notify19 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_19_fr > kilo_max)
+{Checkpoint19 = 1; notify19 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_19_fr < kilo_min)
+                     {Checkpoint19 = 1; notify19 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_19_fr <= kilo_max and
+                      kilo_19_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_19 == false){Checkpoint19 = 1; notify19 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_19 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_19 == false){Checkpoint19 = 1; notify19 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_19 == true){clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_19 == false){Checkpoint19 = 1; notify19 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_19 == true){clickByIdAndIndex("", 20);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+          Online = getBounds("ออนไลน์");
+           sorry = getBounds("*ขออภัย*");
+        
+if(global_PHANToM_XI != 1){Notification = null}
+else if(global_PHANToM_XI == 1)
+{bounds_21 = getContentDescriptionByIdAndIndex("", 21);
+ if(bounds_21 == "" and Online    != null and Checkpoint19 == 1){Notification = notify19}
+ else if(bounds_21 != ""   and Online    != null and bounds_21 != null and Checkpoint19 == 1)
+{ban_detect_21 = findAll(bounds_21,'.*\nอยู่ห่าง');
+ ban_detect_21st = replaceAll(ban_detect_21,'\nอยู่ห่าง]','');
+ ban_detect_21nd =replace(ban_detect_21st, '[', '');
+ ban_matches_21 = matches(ban_detect_21nd,shop_ban_list);
+ kilo_21 = findAll(bounds_21, '.*[0-9].[0-9][[0-9][ ]].*');
+ price_21 = findAll(bounds_21, '.*[0-9][0-9].[0-9].*');
+ kilo_21_r1=replace(kilo_21, '[', '');
+ kilo_21_r2=replace(kilo_21_r1, ']', '');
+ kilo_21_fr = kilo_21_r2 ;
+ price_21_r1=replace(price_21, '[', '');
+ price_21_r2=replace(price_21_r1, ']', '');
+ price_21_fr = price_21_r2 ;
+ Origin_detect_21 = findAll(bounds_21,'กม.\n.*');
+ Origin_detect_21st = replace(Origin_detect_21, '[กม.\n', '');
+ Origin_detect_21nd = replaceAll(Origin_detect_21st,']','');
+ Destination_detect_21 = findAll(bounds_21,'กม.\n.*\n.*');
+ Destination_detect_21st =replaceAll(Destination_detect_21,']','');
+ Destination_detect_21nd = replaceAll(Destination_detect_21st, 'กม.\n.*\n', '');
+ Destination_detect_21th = replace(Destination_detect_21nd, '[', '');
+ ban_matches_21 = matches(ban_detect_21nd,shop_ban_list);
+ Origin_matches_21 = matches(Origin_detect_21nd,Origin_List);
+ Destination_matches_21 = matches(Destination_detect_21nd,Destination_List);
+
+ if(global_ban == 1)
+   {if(ban_matches_21 == true){Checkpoint21 = 1; notify21 ="แบนร้าน"}
+else if(ban_matches_21 == false)
+{if(price_max == null or price_min == null)
+{Notification = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Notification = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_21_fr > price_max)
+{Checkpoint21 = 1; notify21 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_21_fr < price_min)
+{Checkpoint21 = 1; notify21 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_21_fr <= price_max and 
+price_21_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Notification = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Notification = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_21_fr > kilo_max)
+{Checkpoint21 = 1; notify21 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_21_fr < kilo_min)
+                     {Checkpoint21 = 1; notify21 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_21_fr <= kilo_max and
+                      kilo_21_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_21 == false){Checkpoint21 = 1; notify21 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_21 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_21 == false){Checkpoint21 = 1; notify21 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_21 == true){clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_21 == false){Checkpoint21 = 1; notify21 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_21 == true){clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    
+}}}
+
+
+ else if(global_ban != 1)
+{if(price_max == null or price_min == null)
+{Checkpoint21 = 1; notify21 = "โปรดกำหนด'ราคา'"}
+else if(price_max < price_min)
+{Checkpoint21 = 1; notify21 = "'ราคา'ผิดพลาด"}
+else if(price_max >= price_min)
+{if(price_21_fr > price_max)
+{Checkpoint21 = 1; notify21 = "'ราคา'เกินกว่ากำหนด"}
+else if(price_21_fr < price_min)
+{Checkpoint21 = 1; notify21 = "'ราคา'ต่ำกว่ากำหนด"} 
+else if(price_21_fr <= price_max and 
+price_21_fr >= price_min)
+{if(kilo_max == null or 
+kilo_min == null){Checkpoint21 = 1; notify21 = "โปรดตั้งเงื่อนไขกิโล"}
+else if(kilo_max < kilo_min){Checkpoint21 = 1; notify21 = "'ระยะกิโล'ผิดพลาด"}
+else if(kilo_max >= kilo_min)
+{if(kilo_21_fr > kilo_max)
+{Checkpoint21 = 1; notify21 = "'ระยะกิโล'เกินกว่ากำหนด"}
+              else if(kilo_21_fr < kilo_min)
+                     {Checkpoint21 = 1; notify21 = "'ระยะกิโล'ต่ำกว่ากำหนด"} 
+              else if(kilo_21_fr <= kilo_max and
+                      kilo_21_fr >= kilo_min)
+{if(global_OriginLock == 1){
+if(Origin_matches_21 == false){Checkpoint21 = 1; notify21 ="'ต้นทาง'ไม่ตรงเงื่อนไข"}
+else if(Origin_matches_21 == true)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_21 == false){Checkpoint21 = 1; notify21 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_21 == true){clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}    }}}}}}
+}}
+else if(global_OriginLock != 1)
+{if(global_DestinateLock != 1){
+clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+else if(global_DestinateLock == 1)
+{if(Destination_matches_21 == false){Checkpoint21 = 1; notify21 = "'ปลายทาง'ไม่ตรงเงื่อนไข"}
+else if(Destination_matches_21 == true){clickByIdAndIndex("", 22);sleep(PHANToM_Delay);PHANToM_Shot = 1;}
+}}}
+}
+if(PHANToM_Shot == 1)
+{if(global_PHANToM_runnum == 1){
+        PHANToM_CT = 1;
+        while(PHANToM_CT <= PHANToM_Round){
+              Num = 0;
+              PHANToM_List = [0 to 99];
+              shuffleList(PHANToM_List);
+              while(Num <= 99) 
+                   {PHANToM_Element = getElement(PHANToM_List, Num);
+                    if (PHANToM_Element <= 9)
+                       {PHANToM = "0{PHANToM_Element}"}
+                    else if (PHANToM_Element >= 10)
+                            {PHANToM = "{PHANToM_Element}"};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Notification = "เปลี่ยนคีย์บอร์ดด้วยจ้า";
+                             sendText(PHANToM);
+                             setSelection(0, 2);
+                             sleep(PHANToM_Sleep);
+  PHANToM_Sleep = (PHANToM_Sleep * PHANToM_Scale);
+  Num = (Num + 1);}
+  PHANToM_CT = PHANToM_CT + 1;
+PHANToM_Sleep = PHANToM_Sleep * PHANToM_Scale1}
+}
+PHANToM_Shot = null}
+
+if(sorry != null){sleep(300);click("กลับสู่หน้ารับงาน");
+sleep(300);click("ตกลง");}
