@@ -1,0 +1,15 @@
+sleep(Delay);
+LoopOver = 0;
+Index = 11;
+while(LoopOver <= Round){
+sleep(Speed);
+Paste_get = getBounds("Paste");
+if(Paste_get != null){sleep(Speed);click("Paste");
+sleep(Speed);clickByIdAndIndex("", 7);
+LoopOver = LoopOver + 1;}
+else if(Paste_get == null){
+Longclick = longclickByIdAndIndex("", Index);
+LoopOver = LoopOver + 1;
+if(Index >= 14){Index = 9}
+else if(Index < 14){Index = Index + 1;}
+}}
